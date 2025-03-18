@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios"; // Import Axios
 
 const Dashboard = () => {
-  const Base_url = process.env.REACT_APP_BASE_URL || "http://localhost:5000/admin";
+  const Base_url = process.env.REACT_APP_BASE_URL ;
   const [userCounts, setUserCounts] = useState({
     totalMembers: 0,
     freeMembers: 0,

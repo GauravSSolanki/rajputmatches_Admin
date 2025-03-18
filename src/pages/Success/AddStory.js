@@ -4,7 +4,7 @@ import axios from "axios";
 
 const AddStory = () => {
   const Base_url =
-    process.env.REACT_APP_BASE_URL || "http://localhost:5000/admin";
+    process.env.REACT_APP_BASE_URL ;
   const [formData, setFormData] = useState({
     title: "",
     description: "",

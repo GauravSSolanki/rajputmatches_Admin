@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router-dom"; // Added useParams
 import { useAuth } from "../AuthContext";
 import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
 import { LuBadgeCheck } from "react-icons/lu";
+import { FaTimes } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function ViewMember() {
   const { updateData } = useAuth();
@@ -165,9 +167,14 @@ function ViewMember() {
                       {isApproved ? "Disapprove" : "Approve"}
                     </button>
 
-                    {isApproved && (
-                      <LuBadgeCheck className="text-success ms-2" size={26} />
-                    )}
+                    {isApproved && <span className="text-success ms-2">✔</span>}
+
+                    {/* Cross Icon to navigate back to Free Members */}
+                    <div className="text-right">
+                      <Link to="Members/Free-Members" className="ms-3">
+                        <FaTimes size={26} color="black" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
                 <div className="row p-2">

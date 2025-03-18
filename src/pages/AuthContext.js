@@ -6,8 +6,7 @@ import { toast } from "react-toastify";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const Base_url =
-    process.env.REACT_APP_BASE_URL || "http://localhost:5000/admin";
+  var Base_url = process.env.REACT_APP_BASE_URL;
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(
     JSON.parse(localStorage.getItem("isAuthenticated")) || false
@@ -35,6 +34,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (route, data) => {
     try {
       console.log(data);
+      console.log(Base_url);
       const response = await axios.post(`${Base_url}/${route}`, data);
       const { message, token } = response.data;
       setMessage(message);
@@ -47,6 +47,23 @@ export const AuthProvider = ({ children }) => {
       setMessage(errorMessage);
       toast.error(errorMessage);
       console.error("Login error:", error);
+    }
+  };
+
+  const register = async (route, data) => {
+    try {
+      const response = await axios.post(`${Base_url}/${route}`, data);
+      const { message, token } = response.data;
+      setMessage(message);
+      if (token) setToken(token);
+      toast.success("Registration successful!");
+      setRedirectToLogin(false);
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message || "An error occurred. Please try again.";
+      setMessage(errorMessage);
+      toast.error(errorMessage);
+      console.error("Registration error:", error);
     }
   };
 
@@ -101,6 +118,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         isAuthenticated,
+        register,
         login,
         logout,
         storyId,

@@ -7,8 +7,7 @@ import { useNavigate } from "react-router-dom";
 const EditStory = () => {
   const { updateData, storyId } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
-  const Base_url =
-    process.env.REACT_APP_BASE_URL || "http://localhost:5000/admin";
+  var Base_url = process.env.REACT_APP_BASE_URL;
 
   const navigate = useNavigate();
 
@@ -20,17 +19,16 @@ const EditStory = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-  
+
     const regexRules = {
       title: /^[a-zA-Z0-9 ,._\s]{0,30}$/, // Max 50 characters for title
       description: /^[a-zA-Z0-9 ,._\s]{0,100}$/, // Max 100 characters for description
     };
-  
+
     if (regexRules[name] && regexRules[name].test(value)) {
       setFormData({ ...formData, [name]: value });
     }
   };
-  
 
   useEffect(() => {
     const fetchStory = async () => {

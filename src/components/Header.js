@@ -38,7 +38,7 @@ const Header = () => {
     }
   };
 
-  var visibleNotifications = notifications.slice(0, 4);
+  var visibleNotifications = notifications?.slice(0, 4);
 
   return (
     <>
@@ -98,7 +98,7 @@ const Header = () => {
                   overflowY: "scroll",
                 }}
               >
-                {visibleNotifications.length > 0 ? (
+                {visibleNotifications?.length > 0 ? (
                   (showAll ? notifications : visibleNotifications).map(
                     (notif, index) => (
                       <Link
@@ -146,7 +146,7 @@ const Header = () => {
                 )}
               </div> */}
               <div className="dropdown-footer text-center">
-                {notifications.length > 4 && (
+                {notifications?.length > 4 && (
                   <Link
                     to="#"
                     onClick={(e) => {
@@ -186,6 +186,13 @@ const Header = () => {
               <i className="fas fa-cog"></i> Settings
             </Link>
             <div className="dropdown-divider"></div> */}
+              <Link
+                to="Members/Create-New-Admin"
+                className="dropdown-item has-icon text-success"
+              >
+                <i className="fas fa-user-shield text-lg"></i>
+                Add New Admin
+              </Link>
               <Link
                 to="#"
                 onClick={logout}

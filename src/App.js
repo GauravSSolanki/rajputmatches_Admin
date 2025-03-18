@@ -12,6 +12,7 @@ import BlockedMembers from "./pages/Members/BlockedMember";
 import DeletedMembers from "./pages/Members/DeletedMembers";
 import AddMembers from "./pages/Members/AddMembers";
 import ViewMembers from "./pages/Members/ViewMember";
+import CreateNewAdmin from "./pages/Members/CreateNewAdmin";
 
 import Limits from "./pages/Attributes/Limits";
 import FamilyStatuses from "./pages/Attributes/FamilyStatuses";
@@ -32,6 +33,9 @@ import SuccessStories from "./pages/Success/SuccessStories";
 import EditStory from "./pages/Success/EditStory";
 import AddStory from "./pages/Success/AddStory";
 import Contactus from "./pages/Contact/Contactus";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { useAuth } from "./pages/AuthContext";
 
@@ -60,6 +64,7 @@ const AppLayout = () => {
         </Routes>
       </main>
       {authState && <Footer />}
+      <ToastContainer />
     </>
   );
 };
@@ -74,6 +79,7 @@ const ProtectedRoutes = () => (
     <Route path="Members/Blocked-Members" element={<BlockedMembers />} />
     <Route path="Members/Add-Members" element={<AddMembers />} />
     <Route path="Members/View-Members/:profileId" element={<ViewMembers />} />
+    <Route path="Members/Create-New-Admin" element={<CreateNewAdmin />} />
 
     <Route path="Attributes/Marital-Statuses" element={<MaritalStatuses />} />
     <Route path="Attributes/FamilyStatuses" element={<FamilyStatuses />} />
