@@ -314,6 +314,13 @@ const Header = () => {
             </li>
 
             <li className="dropdown">
+              <Link to="terms-of-use" className="nav-link">
+                <i className="fa fa-gavel"></i>
+                <span>Terms of Use</span>
+              </Link>
+            </li>
+
+            <li className="dropdown">
               <Link to="/Site-Setting/Site-Setting" className="nav-link">
                 <i className="fa fa-cogs"></i>
                 <span>Site Setting</span>

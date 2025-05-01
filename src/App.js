@@ -38,6 +38,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { useAuth } from "./pages/AuthContext";
+import TermsAndPrivacy from "./pages/TermsAndPrivacy";
 
 const AppLayout = () => {
   const { isAuthenticated } = useAuth();
@@ -101,8 +102,9 @@ const ProtectedRoutes = () => (
     <Route path="Success/Add-Story" element={<AddStory />} />
     <Route path="Success/Edit-Story" element={<EditStory />} />
 
-    <Route path="Contact/Contactus" element={<Contactus />} />
-
+    {/* <Route path="Contact/Contactus" element={<Contactus />} /> */}
+    <Route path="Contact/Contactus" element={<TermsAndPrivacy />} />
+    <Route path="Terms-of-use" element={<TermsAndPrivacy />} />
     <Route path="*" element={<PageNotFound />} />
   </Routes>
 );

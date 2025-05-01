@@ -72,6 +72,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const token = getToken();
       if (!token) return null;
+      console.log(route);
       const response = await axios.get(`${Base_url}/${route}`, {
         headers: { Authorization: `Bearer ${token}` },
       });

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios"; // Import Axios
 
 const Dashboard = () => {
-  const Base_url = process.env.REACT_APP_BASE_URL ;
+  const Base_url = process.env.REACT_APP_BASE_URL;
   const [userCounts, setUserCounts] = useState({
     totalMembers: 0,
     freeMembers: 0,
@@ -14,10 +14,8 @@ const Dashboard = () => {
   const fetchUserCounts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(
-        `${Base_url}/dashboard/user-counts`
-      );
-      // console.log(response);
+      const response = await axios.get(`${Base_url}/dashboard/user-counts`);
+      console.log(response);
       setUserCounts(response?.data?.data);
     } catch (error) {
       console.error("Error fetching user counts:", error);
