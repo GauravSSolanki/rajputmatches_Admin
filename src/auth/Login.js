@@ -11,21 +11,27 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false); // Add this at the top with other states
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
     try {
       let route = "login";
-      var data = {
-        username: username,
-        password: password,
+      const data = {
+        username,
+        password,
       };
+
       console.log(data);
       await login(route, data);
       navigate("/dashboard");
     } catch (err) {
       setError("Invalid email or password");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -91,8 +97,9 @@ const Login = () => {
                     <button
                       type="submit"
                       className="btn btn-primary btn-lg btn-block"
+                      disabled={loading}
                     >
-                      Login
+                      {loading ? "Logging in..." : "Login"}
                     </button>
                   </div>
                 </form>
