@@ -6,6 +6,11 @@ import { Link } from "react-router-dom";
 const FreeMembers = () => {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [actionLoading, setActionLoading] = useState({
+    block: null,
+    delete: null,
+    approve: null,
+  });
 
   const { fetchUserData, updateData } = useAuth();
   const fetchData = async () => {
@@ -21,6 +26,7 @@ const FreeMembers = () => {
   }, []);
 
   const handleBlock = async (memberId) => {
+    setActionLoading((prev) => ({ ...prev, block: memberId }));
     try {
       const route = `block-member`;
       const result = await updateData(route, memberId);
@@ -28,29 +34,36 @@ const FreeMembers = () => {
       fetchData();
     } catch (error) {
       console.log("Error blocking member:", error);
+    } finally {
+      setActionLoading((prev) => ({ ...prev, block: null }));
     }
   };
 
   const handleDelete = async (memberId) => {
+    setActionLoading((prev) => ({ ...prev, delete: memberId }));
     try {
       const route = `delete-member`;
       const result = await updateData(route, memberId);
-      console.log("Deleted member with ID:", result);
+      console.log("Deleted member:", result);
       fetchData();
     } catch (error) {
       console.error("Error deleting member:", error);
+    } finally {
+      setActionLoading((prev) => ({ ...prev, delete: null }));
     }
   };
 
   const handleApprove = async (memberId) => {
+    setActionLoading((prev) => ({ ...prev, approve: memberId }));
     try {
       const route = `Approve-member`;
-      console.log("member", memberId);
       const result = await updateData(route, memberId);
-      console.log("approve member with ID:", result);
+      console.log("Approved member:", result);
       fetchData();
     } catch (error) {
-      console.error("Error deleting member:", error);
+      console.error("Error approving member:", error);
+    } finally {
+      setActionLoading((prev) => ({ ...prev, approve: null }));
     }
   };
 
@@ -187,24 +200,52 @@ const FreeMembers = () => {
                                         View
                                       </Link>
                                       <a
-                                        className="dropdown-item"
-                                        onClick={() => handleBlock(member._id)}
-                                      >
-                                        Block
-                                      </a>
-                                      <a
-                                        className="dropdown-item"
-                                        onClick={() => handleDelete(member._id)}
-                                      >
-                                        Delete
-                                      </a>
-                                      <a
-                                        className="dropdown-item"
+                                        className={`dropdown-item ${
+                                          actionLoading.block === member._id
+                                            ? "disabled"
+                                            : ""
+                                        }`}
                                         onClick={() =>
+                                          actionLoading.block !== member._id &&
+                                          handleBlock(member._id)
+                                        }
+                                      >
+                                        {actionLoading.block === member._id
+                                          ? "Blocking..."
+                                          : "Block"}
+                                      </a>
+
+                                      <a
+                                        className={`dropdown-item ${
+                                          actionLoading.delete === member._id
+                                            ? "disabled"
+                                            : ""
+                                        }`}
+                                        onClick={() =>
+                                          actionLoading.delete !== member._id &&
+                                          handleDelete(member._id)
+                                        }
+                                      >
+                                        {actionLoading.delete === member._id
+                                          ? "Deleting..."
+                                          : "Delete"}
+                                      </a>
+
+                                      <a
+                                        className={`dropdown-item ${
+                                          actionLoading.approve === member._id
+                                            ? "disabled"
+                                            : ""
+                                        }`}
+                                        onClick={() =>
+                                          actionLoading.approve !==
+                                            member._id &&
                                           handleApprove(member._id)
                                         }
                                       >
-                                        Approve
+                                        {actionLoading.approve === member._id
+                                          ? "Approving..."
+                                          : "Approve"}
                                       </a>
                                     </div>
                                   </div>

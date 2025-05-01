@@ -118,16 +118,20 @@ function ViewMember() {
     maternalGrandMotherthikana: "Address",
   };
 
+  const [loading, setLoading] = useState(false);
+
   const handleApprove = async () => {
+    setLoading(true);
     try {
       const route = `Approve-member`;
       console.log("member", profileId);
       const result = await updateData(route, profileId);
       console.log("approve member with ID:", result);
-      // fetchData();
       handleView();
     } catch (error) {
-      console.error("Error deleting member:", error);
+      console.error("Error approving member:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -162,9 +166,14 @@ function ViewMember() {
                       className={`col-md-2 m-2 p-1 btn ${
                         isApproved ? "btn-danger" : "btn-success"
                       }`}
-                      onClick={() => handleApprove()}
+                      onClick={handleApprove}
+                      disabled={loading}
                     >
-                      {isApproved ? "Disapprove" : "Approve"}
+                      {loading
+                        ? "Processing..."
+                        : isApproved
+                        ? "Disapprove"
+                        : "Approve"}
                     </button>
 
                     {isApproved && <span className="text-success ms-2">✔</span>}

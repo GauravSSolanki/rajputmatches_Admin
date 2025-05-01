@@ -102,8 +102,7 @@ const ProtectedRoutes = () => (
     <Route path="Success/Add-Story" element={<AddStory />} />
     <Route path="Success/Edit-Story" element={<EditStory />} />
 
-    {/* <Route path="Contact/Contactus" element={<Contactus />} /> */}
-    <Route path="Contact/Contactus" element={<TermsAndPrivacy />} />
+    <Route path="Contact/Contactus" element={<Contactus />} />
     <Route path="Terms-of-use" element={<TermsAndPrivacy />} />
     <Route path="*" element={<PageNotFound />} />
   </Routes>
