@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 
 function ViewMember() {
   const { updateData } = useAuth();
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { profileId } = useParams();
   const navigate = useNavigate();

@@ -39,6 +39,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { useAuth } from "./pages/AuthContext";
 import TermsAndPrivacy from "./pages/TermsAndPrivacy";
+import ForgetPassword from "./auth/ForgetPassword";
+import NewPassword from "./auth/NewPassword";
 
 const AppLayout = () => {
   const { isAuthenticated } = useAuth();
@@ -54,6 +56,8 @@ const AppLayout = () => {
       <main>
         <Routes>
           <Route path="login" element={<Login />} />
+          <Route path="forget-password" element={<ForgetPassword />} />
+          <Route path="set-new-password" element={<NewPassword />} />
           <Route
             path="/*"
             element={
@@ -104,6 +108,7 @@ const ProtectedRoutes = () => (
 
     <Route path="Contact/Contactus" element={<Contactus />} />
     <Route path="Terms-of-use" element={<TermsAndPrivacy />} />
+
     <Route path="*" element={<PageNotFound />} />
   </Routes>
 );

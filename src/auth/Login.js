@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../pages/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -11,7 +12,7 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const [loading, setLoading] = useState(false); // Add this at the top with other states
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -40,7 +41,7 @@ const Login = () => {
       <div className="container mt-5">
         <div className="row">
           <div className="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-            <div className="card card-primary">
+            <div className="card card-danger">
               <div className="card-header">
                 <h4>Login</h4>
               </div>
@@ -78,6 +79,7 @@ const Login = () => {
                         required
                         autoComplete="current-password"
                       />
+
                       <div className="input-group-append">
                         <button
                           type="button"
@@ -88,15 +90,17 @@ const Login = () => {
                         </button>
                       </div>
                     </div>
-                    <div className="invalid-feedback">
-                      Please fill in your password
+                    <div className="text-right mt-2">
+                      <Link to="/forget-password" className="large text-dark">
+                        Forgot Password?
+                      </Link>
                     </div>
                   </div>
 
                   <div className="form-group">
                     <button
                       type="submit"
-                      className="btn btn-primary btn-lg btn-block"
+                      className="btn btn-danger btn-lg btn-block"
                       disabled={loading}
                     >
                       {loading ? "Logging in..." : "Login"}
