@@ -3,8 +3,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 const AddStory = () => {
-  const Base_url =
-    process.env.REACT_APP_BASE_URL ;
+  const Base_url = process.env.REACT_APP_BASE_URL;
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -13,17 +12,16 @@ const AddStory = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-  
+
     const regexRules = {
-      title: /^[a-zA-Z0-9 ,._\s]{0,40}$/, // Max 50 characters for title
-      description: /^[a-zA-Z0-9 ,._\s]{0,100}$/, // Max 100 characters for description
+      title: /^[A-Za-z\s\W]{0,40}$/, // No numbers, allows symbols, letters, and space
+      description: /^[A-Za-z\s\W]{0,100}$/, // Same as above with longer length
     };
-  
+
     if (regexRules[name] && regexRules[name].test(value)) {
       setFormData({ ...formData, [name]: value });
     }
   };
-  
 
   const handleImageChange = (e) => {
     setFormData({ ...formData, avatar: e.target.files[0] });
