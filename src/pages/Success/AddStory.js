@@ -14,7 +14,7 @@ const AddStory = () => {
     const { name, value } = e.target;
 
     const regexRules = {
-      title: /^[A-Za-z\s.,'"!?:;()\-]{0,40}$/,
+      title: /^[A-Za-z\s\W]{0,40}$/,
       description: /^[A-Za-z\s.,'"!?:;()\-]{0,400}$/,
     };
 
@@ -38,9 +38,9 @@ const AddStory = () => {
     formDataToSend.append("description", formData.description);
 
     if (formData.avatar) {
-      formDataToSend.append("avatar", formData.avatar);
+      formDataToSend?.append("avatar", formData.avatar);
     } else {
-      alert("Please upload an image!");
+      toast.success("Image not uploaded");
       return;
     }
 
@@ -67,17 +67,17 @@ const AddStory = () => {
       );
 
       if (response.data?.message) {
-        toast.success(response.data.message);
+        toast.success(response.data?.message);
       }
       console.log("Story submitted successfully:", response.data);
       setFormData({ title: "", description: "", avatar: null });
-      alert("Story added successfully!");
+      // alert("Story added successfully!");
     } catch (error) {
       console.error(
         "Error submitting story:",
         error.response?.data?.message || error.message
       );
-      alert("Error submitting the story. Please try again.");
+      // alert("Error submitting the story. Please try again.");
     }
   };
 
