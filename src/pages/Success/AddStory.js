@@ -14,8 +14,8 @@ const AddStory = () => {
     const { name, value } = e.target;
 
     const regexRules = {
-      title: /^[A-Za-z\s\W]{0,40}$/, // No numbers, allows symbols, letters, and space
-      description: /^[A-Za-z\s\W]{0,100}$/, // Same as above with longer length
+      title: /^[A-Za-z\s.,'"!?:;()\-]{0,40}$/,
+      description: /^[A-Za-z\s.,'"!?:;()\-]{0,400}$/,
     };
 
     if (regexRules[name] && regexRules[name].test(value)) {
