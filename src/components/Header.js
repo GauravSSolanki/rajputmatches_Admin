@@ -261,7 +261,7 @@ const Header = () => {
             </li>
 
             <li className="dropdown">
-              <Link to="#" className="menu-toggle nav-link has-dropdown">
+              <Link to="" className="menu-toggle nav-link has-dropdown">
                 <i className="fa fa-users"></i>
                 <span>Members</span>
               </Link>
@@ -286,7 +286,7 @@ const Header = () => {
 
             <li className="menu-header">Profile Attributes</li>
             <li className="dropdown">
-              <Link to="#" className="menu-toggle nav-link has-dropdown">
+              <Link to="" className="menu-toggle nav-link has-dropdown">
                 <i className="fa fa-user"></i>
                 <span>Profile Attributes</span>
               </Link>
